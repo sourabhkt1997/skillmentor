@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+</head>
+<body>
+    <input type="file" id="imageInput">
+    <button id="uploadButton">Upload Image</button>
+    <p id="message"></p>
+
+    <div id="userDetails">
+        <h2>User Details</h2>
+        <p id="userName"></p>
+        <p id="userEmail"></p>
+    </div>
+
+    <div id="imageContainer">
+        <img id="userImage" src="" alt="User Image">
+    </div>
+
+    <script>
+        const userId = "64f44e082cea35b19891d3ac"; // Replace with the actual user ID
+
+        document.getElementById('uploadButton').addEventListener('click', async () => {
+            const imageInput = document.getElementById('imageInput');
+            const file = imageInput.files[0];
+
+            if (!file) {
+                document.getElementById('message').innerText = 'Please select an image to upload.';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const response = await fetch(`http://localhost:8600/user/upload/${userId}`, {
+                    method: 'PATCH',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    document.getElementById('message').innerText = `Error: ${errorMessage}`;
+                    return;
+                }
+
+                const data = await response.json();
+                console.log(data,"data")
+                document.getElementById('message').innerText = 'Image uploaded successfully!';
+                console.log(data); // You can handle the response data as needed
+            } catch (error) {
+                console.error('An error occurred:', error);
+                document.getElementById('message').innerText = 'An error occurred during file upload.';
+            }
+        });
+
+        async function fetchUserImage() {
+            try {
+                const response = await fetch(`http://localhost:8600/user/api/images/${userId}`);
+                
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    console.error(`Error: ${errorMessage}`);
+                    return;
+                }
+
+                const userData = await response.json();
+                console.log(userData)
+                const userImage = document.getElementById('userImage');
+                const userName = document.getElementById('userName');
+                const userEmail = document.getElementById('userEmail');
+                userName.innerText = `Name: ${userData.name}`;
+                userEmail.innerText = `Email: ${userData.msg.email}`;
+                
+                // Set the user image source
+                pattern = /https:\/\//;
+
+                userImage.src = `data:image/jpeg;base64, ${userData.msg.image}`;
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        }
+
+        // Call the function to fetch and display the user image
+        fetchUserImage();
+    </script>
+</body>
+</html>
+

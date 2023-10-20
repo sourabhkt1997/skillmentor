@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <link rel="stylesheet" href="./login.css" />
+    <link rel="stylesheet" href="sweetalert2.min.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="signup_main_Div">
+        <img id="logo" src="./Image/learnmate-logo.png"alt="" />
+        <form action="">
+          <h1>Log in</h1>
+          <label for="">Email</label><br />
+          <input
+            type="email"
+            id="email"
+            placeholder="xyz@gmail.com"
+            required
+          /><br />
+          <label for="">Password</label><br />
+          <input
+            type="password"
+            id="password"
+            placeholder="12345"
+            required
+          /><br />
+          <a id="forgotPassA" href="./forgotPass.html">Forgot Password?</a>
+          <h4 id="msg"></h4>
+          <input type="submit" value="Login" id="signupBtn" />
+          <div id="border-google" style="border: 3px solid rgb(149, 149, 232);
+          padding: 2px;
+          border-radius: 5px;"
+          >
+            <a id="submit-google" href= "https://skillmentor.onrender.com/auth/google"style="display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 5vh;
+            /* Adjust the height to match your layout */
+            font-size: 20px;
+            text-decoration: none;
+            color: #141a34;
+            font-weight: 700;
+            /* border: 10px solid red; */
+            /* margin: 10px; */"><img style=" max-width: 10%;"
+                src="https://cdn-teams-slug.flaticon.com/google.jpg" alt="">Continue With
+              Google</a>
+          </div>
+          <div id="loginPageDiv">
+            <p>Don't have an Account?</p>
+            <a href="./signup.html">Signup</a>
+          </div>
+        </form>
+      </div>
+      <img
+        src="https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fe33c4c5b632a810b01b2cd6cfedf523b.cdn.bubble.io%2Ff1658770525142x498584478885497150%2FBase%2520login%2520page%2520branding.png?w=768&h=1282&auto=compress&dpr=1.25&fit=crop&q=75"
+        alt=""
+      />
+    </div>
+  </body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./login.js"></script>
